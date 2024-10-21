@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Management</title>
+</head>
+<body>
+  <h1>Product List</h1>
+  <form action="/product" method="POST">
+    <input type="text" name="name" placeholder="Product Name" required>
+    <input type="text" name="category" placeholder="Category" required>
+    <input type="number" name="price" placeholder="Price" required>
+    <button type="submit">Add Product</button>
+  </form>
+
+  <table border="1">
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Category</th>
+      <th>Price</th>
+      <th>Actions</th>
+    </tr>
+    <% products.forEach(product => { %>
+      <tr>
+        <td><%= product.id %></td>
+        <td><%= product.name %></td>
+        <td><%= product.category %></td>
+        <td><%= product.price %></td>
+        <td>
+          <form action="/update/<%= product.id %>" method="POST">
+            <input type="text" name="name" value="<%= product.name %>" required>
+            <input type="text" name="category" value="<%= product.category %>" required>
+            <input type="number" name="price" value="<%= product.price %>" required>
+            <button type="submit">Update</button>
+          </form>
+          <a href="/delete/<%= product.id %>">Delete</a>
+        </td>
+      </tr>
+    <% }); %>
+  </table>
+</body>
+</html>
